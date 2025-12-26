@@ -1,10 +1,66 @@
-@layer theme, base, clerk, components, utilities; /* Ensure Clerk is compatible with Tailwind CSS v4 */
+@layer theme, base, components, utilities;
 
 @import 'tailwindcss';
 
 body {
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #111111;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 17, 1) 10%,
+    rgba(49, 107, 49, 1) 51%,
+    rgba(4, 59, 4, 0.88) 83%,
+    rgba(17, 17, 17, 1) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all 0.3s ease-in-out;
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  min-width: 100%;
+}
+
+/* * {
+  border: 1px solid black !important;
+} */
+
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(4, 59, 4, 0.3);
+  border-radius: 10px;
+  margin: 4px 0;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background: linear-gradient(180deg, #198340, #0c5526);
+  border-radius: 10px;
+  border: 2px solid rgba(17, 17, 17, 0.5);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4ade80, #16a34a);
+  border-color: rgba(17, 17, 17, 0.3);
+  box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #16a34a, #14532d);
+  border-color: rgba(17, 17, 17, 0.7);
+  box-shadow: 0 0 14px rgba(22, 163, 74, 0.8);
+}
+
+/* Для Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #146130 rgba(4, 59, 4, 0.3);
 }

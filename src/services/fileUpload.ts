@@ -1,5 +1,6 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import { Buffer } from 'node:buffer';
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
 import { v4 as uuidv4 } from 'uuid';
 
 export class FileUploadService {
@@ -18,28 +19,28 @@ export class FileUploadService {
   }
 
   async saveFile(file: File): Promise<string> {
-    try {
-      const buffer = Buffer.from(await file.arrayBuffer());
-      const fileExtension = file.name.split('.').pop();
-      const fileName = `${uuidv4()}.${fileExtension}`;
-      const filePath = path.join(this.uploadDir, fileName);
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const fileExtension = file.name.split('.').pop();
+    const fileName = `${uuidv4()}.${fileExtension}`;
+    const filePath = path.join(this.uploadDir, fileName);
 
-      await fs.writeFile(filePath, buffer);
-      
-      return `/uploads/${fileName}`;
-    } catch (error) {
-      throw error;
-    }
+    await fs.writeFile(filePath, buffer);
+
+    return `/uploads/${fileName}`;
   }
 
   async deleteFile(fileUrl: string): Promise<void> {
-    if (!fileUrl) return;
-    
+    if (!fileUrl) {
+      return;
+    }
+
     const fileName = fileUrl.split('/').pop();
-    if (!fileName) return;
+    if (!fileName) {
+      return;
+    }
 
     const filePath = path.join(this.uploadDir, fileName);
-    
+
     try {
       await fs.unlink(filePath);
     } catch (error) {

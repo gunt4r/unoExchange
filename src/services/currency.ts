@@ -1,7 +1,6 @@
-// src/services/CurrencyService.ts
+import type { Repository } from 'typeorm';
 import { getDataSource } from '@/libs/DB';
 import { Currency } from '@/models/currency';
-import { Repository } from 'typeorm';
 
 export class CurrencyService {
   private async getRepository(): Promise<Repository<Currency>> {
@@ -9,7 +8,6 @@ export class CurrencyService {
     return dataSource.getRepository(Currency);
   }
 
-  // Создать валюту
   async createCurrency(data: {
     code: string;
     name: string;
@@ -19,14 +17,14 @@ export class CurrencyService {
     isBase?: boolean;
   }): Promise<Currency> {
     const repository = await this.getRepository();
-    
-    try {
-    if (data.isBase) {
-      data.rateToZL = 1;
-    }
 
-    const currency = repository.create(data);
-    return await repository.save(currency);
+    try {
+      if (data.isBase) {
+        data.rateToZL = 1;
+      }
+
+      const currency = repository.create(data);
+      return await repository.save(currency);
     } catch (error) {
       console.error('Error creating currency:', error);
       throw error;
@@ -36,7 +34,7 @@ export class CurrencyService {
   async getAllCurrencies(): Promise<Currency[]> {
     const repository = await this.getRepository();
     return await repository.find({
-      order: { isBase: 'DESC', code: 'ASC' }
+      order: { isBase: 'DESC', code: 'ASC' },
     });
   }
 
@@ -44,22 +42,22 @@ export class CurrencyService {
     const repository = await this.getRepository();
     return await repository.find({
       where: { isActive: true },
-      order: { isBase: 'DESC', code: 'ASC' }
+      order: { isBase: 'DESC', code: 'ASC' },
     });
   }
 
-  async getCurrencyById(id: number): Promise<Currency | null> {
+  async getCurrencyById(id: string): Promise<Currency | null> {
     const repository = await this.getRepository();
     return await repository.findOne({ where: { id } });
   }
 
-  async updateCurrency(id: number, data: Partial<Currency>): Promise<Currency | null> {
+  async updateCurrency(id: string, data: Partial<Currency>): Promise<Currency | null> {
     const repository = await this.getRepository();
     await repository.update(id, data);
     return await this.getCurrencyById(id);
   }
 
-  async deleteCurrencyById(id: number): Promise<boolean> {
+  async deleteCurrencyById(id: string): Promise<boolean> {
     const repository = await this.getRepository();
     const result = await repository.delete(id);
     return (result.affected ?? 0) > 0;
@@ -73,13 +71,13 @@ export class CurrencyService {
     rate: number;
   }> {
     const repository = await this.getRepository();
-    
-    const fromCurrency = await repository.findOne({ 
-      where: { code: fromCode, isActive: true } 
+
+    const fromCurrency = await repository.findOne({
+      where: { code: fromCode, isActive: true },
     });
-    
-    const toCurrency = await repository.findOne({ 
-      where: { code: toCode, isActive: true } 
+
+    const toCurrency = await repository.findOne({
+      where: { code: toCode, isActive: true },
     });
 
     if (!fromCurrency || !toCurrency) {
@@ -88,7 +86,7 @@ export class CurrencyService {
 
     const amountInZl = amount / Number(fromCurrency.rateToZL);
     const result = amountInZl * Number(toCurrency.rateToZL);
-    
+
     const rate = Number(toCurrency.rateToZL) / Number(fromCurrency.rateToZL);
 
     return {
@@ -96,7 +94,7 @@ export class CurrencyService {
       toCurrency,
       fromAmount: amount,
       toAmount: Number(result.toFixed(2)),
-      rate: Number(rate.toFixed(6))
+      rate: Number(rate.toFixed(6)),
     };
   }
 }

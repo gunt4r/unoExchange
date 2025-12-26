@@ -3,7 +3,9 @@ import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/libs/I18nRouting';
+import { Providers } from './providers';
 import '@/styles/global.css';
+
 export const metadata: Metadata = {
   icons: [
     {
@@ -38,7 +40,6 @@ export default async function RootLayout(props: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await props.params;
-
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -49,7 +50,7 @@ export default async function RootLayout(props: {
     <html lang={locale}>
       <body>
         <NextIntlClientProvider>
-            {props.children}
+          <Providers>{props.children}</Providers>
         </NextIntlClientProvider>
       </body>
     </html>
