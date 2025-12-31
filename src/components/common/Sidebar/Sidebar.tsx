@@ -1,3 +1,4 @@
+/* eslint-disable tailwindcss/no-custom-classname */
 'use client';
 import {
   DollarSign,
@@ -8,6 +9,8 @@ import {
   X,
 } from 'lucide-react';
 import React from 'react';
+import toast from 'react-hot-toast';
+import { useLogout } from '@/queries/useAdmins';
 import MyLink from '../Link';
 
 type NavItem = {
@@ -24,6 +27,7 @@ type SidebarProps = {
 };
 
 export default function Sidebar({ isOpen, onCloseAction, currentPage }: SidebarProps) {
+  const { mutate: logout, isPending } = useLogout();
   const navigation: NavItem[] = [
     { name: 'Currencies', icon: <DollarSign className="h-5 w-5" />, href: '/admin/currencies' },
     { name: 'Articles', icon: <FileText className="h-5 w-5" />, href: '/admin/articles' },
@@ -31,6 +35,17 @@ export default function Sidebar({ isOpen, onCloseAction, currentPage }: SidebarP
     { name: 'Settings', icon: <Settings className="h-5 w-5" />, href: '/admin/settings' },
   ];
 
+  function handleLogout() {
+    logout(undefined, {
+      onSuccess: () => {
+        toast.success('Logout successful');
+        window.location.href = '/admin/login';
+      },
+      onError: () => {
+        toast.error('Logout failed');
+      },
+    });
+  }
   return (
     <>
       {isOpen && (
@@ -53,7 +68,7 @@ export default function Sidebar({ isOpen, onCloseAction, currentPage }: SidebarP
           <div className="flex h-16 items-center justify-between border-b border-gray-200 px-6">
             <div className="flex items-center space-x-2">
               <div className="h-8 w-8 rounded-lg bg-linear-to-br from-emerald-600 to-green-400" />
-              <span className="text-xl font-bold text-gray-900">UNOEXCHANGE</span>
+              <MyLink opacity href="/"><span className="text-xl font-bold text-gray-900">UNOEXCHANGE</span></MyLink>
             </div>
             <button
               onClick={onCloseAction}
@@ -99,9 +114,10 @@ export default function Sidebar({ isOpen, onCloseAction, currentPage }: SidebarP
             <button
               className="mt-2 flex w-full cursor-pointer items-center space-x-2 rounded-lg px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-100"
               type="button"
+              onClick={handleLogout}
             >
               <LogOut className="h-4 w-4" />
-              <span>Logout</span>
+              <span>{isPending ? 'Logging out...' : 'Logout'}</span>
             </button>
           </div>
         </div>

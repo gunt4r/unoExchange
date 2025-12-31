@@ -6,6 +6,6 @@ const localePrefix: LocalePrefixMode = 'as-needed';
 export const AppConfig = {
   name: 'UnoExchange',
   locales: ['en', 'pl', 'ru', 'ua'],
-  defaultLocale: 'en',
+  defaultLocale: 'pl',
   localePrefix,
 };

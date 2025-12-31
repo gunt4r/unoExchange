@@ -53,14 +53,31 @@ export class CurrencyService {
 
   async updateCurrency(id: string, data: Partial<Currency>): Promise<Currency | null> {
     const repository = await this.getRepository();
-    await repository.update(id, data);
+    const currency = await repository.findOne({ where: { id } });
+
+    if (!currency) {
+      return null;
+    }
+    currency.name = data.name ?? currency.name;
+    currency.rateToZL = data.rateToZL ?? currency.rateToZL;
+    currency.imageUrl = data.imageUrl ?? currency.imageUrl;
+    currency.reserve = data.reserve ?? currency.reserve;
+    currency.isActive = data.isActive ?? currency.isActive;
+    currency.isBase = data.isBase ?? currency.isBase;
+
+    await repository.save(currency);
     return await this.getCurrencyById(id);
   }
 
   async deleteCurrencyById(id: string): Promise<boolean> {
     const repository = await this.getRepository();
-    const result = await repository.delete(id);
-    return (result.affected ?? 0) > 0;
+    const currency = await repository.findOne({ where: { id } });
+
+    if (!currency) {
+      return false;
+    }
+    await repository.remove(currency);
+    return true;
   }
 
   async convert(fromCode: string, toCode: string, amount: number): Promise<{

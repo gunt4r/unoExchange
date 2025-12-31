@@ -2,6 +2,7 @@
 import { AlertCircle, Mail, Search, Send, Trash2, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
+type SendStatus = null | { type: string; message: string; details?: any };
 export default function AdminNewsletterPanel() {
   const [emails, setEmails] = useState([]);
   const [filteredEmails, setFilteredEmails] = useState([]);
@@ -13,7 +14,7 @@ export default function AdminNewsletterPanel() {
     htmlContent: '',
     textContent: '',
   });
-  const [sendStatus, setSendStatus] = useState(null);
+  const [sendStatus, setSendStatus] = useState<SendStatus>(null);
 
   useEffect(() => {
     if (searchTerm) {
@@ -87,7 +88,7 @@ export default function AdminNewsletterPanel() {
           message: result.error || 'Ошибка отправки',
         });
       }
-    } catch (error) {
+    } catch {
       setSendStatus({
         type: 'error',
         message: 'Ошибка при отправке рассылки',
@@ -168,7 +169,7 @@ export default function AdminNewsletterPanel() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 bg-white">
-                      {filteredEmails.map(item => (
+                      {filteredEmails.map((item: any) => (
                         <tr key={item.id} className="hover:bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">

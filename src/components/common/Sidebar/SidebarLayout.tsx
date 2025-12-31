@@ -15,12 +15,12 @@ export default function SidebarLayout({ children }: SidebarLayoutProps) {
       <Sidebar
         isOpen={sidebarOpen}
         onCloseAction={() => setSidebarOpen(false)}
-        currentPage="Admin panel"
+        currentPage="ADMIN PANEL"
       />
 
       <div className="w-full">
         <SidebarHeader
-          currentPage="Admin panel"
+          currentPage="ADMIN PANEL"
           onMenuClickAction={() => setSidebarOpen(true)}
         />
 

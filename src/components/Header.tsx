@@ -73,7 +73,6 @@ export default function Header() {
               </div>
             </div>
 
-            {/* Mobile menu with smooth transition using Headless UI Transition */}
             <Transition
               show={open}
               as={Fragment}

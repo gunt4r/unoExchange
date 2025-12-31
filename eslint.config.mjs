@@ -1,5 +1,5 @@
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+// import { dirname } from 'node:path';
+// import { fileURLToPath } from 'node:url';
 import antfu from '@antfu/eslint-config';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import playwright from 'eslint-plugin-playwright';
@@ -38,7 +38,7 @@ export default antfu(
   {
     settings: {
       tailwindcss: {
-        config: `${dirname(fileURLToPath(import.meta.url))}/src/styles/global.css`,
+        // config: `${dirname(fileURLToPath(import.meta.url))}/src/styles/global.css`,
       },
     },
   },

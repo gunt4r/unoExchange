@@ -40,7 +40,7 @@ export default function CurrencyConverterSection() {
               currencies={currencies}
               selectedCurrency={fromCurrency}
               disabledCurrencyCode={toCurrency?.code || null}
-              onSelect={setFromCurrency}
+              onSelectAction={setFromCurrency}
             />
           </div>
 
@@ -50,7 +50,7 @@ export default function CurrencyConverterSection() {
               currencies={currencies}
               selectedCurrency={toCurrency}
               disabledCurrencyCode={fromCurrency?.code || null}
-              onSelect={setToCurrency}
+              onSelectAction={setToCurrency}
             />
           </div>
 

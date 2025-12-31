@@ -49,3 +49,16 @@ export const useSendNewsletter = () => {
     },
   });
 };
+
+export const useUnsubscribeUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (data: any) => {
+      const response = await api.delete(`/admin/newsletter/subscribers/${data}`);
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [REACT_QUERY_GET_NEWSLETTER_SUBSCRIBERS] });
+    },
+  });
+};

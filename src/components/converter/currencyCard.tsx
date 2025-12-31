@@ -8,18 +8,18 @@ type CurrencyCardProps = {
   currency: Currency;
   isSelected: boolean;
   isDisabled: boolean;
-  onClick: (currency: Currency) => void;
+  onClickAction: (currency: Currency) => void;
 };
 
 export default function CurrencyCard({
   currency,
   isSelected,
   isDisabled,
-  onClick,
+  onClickAction,
 }: CurrencyCardProps) {
   return (
     <Button
-      onClick={() => !isDisabled && onClick(currency)}
+      onClick={() => !isDisabled && onClickAction(currency)}
       disabled={isDisabled}
       type="button"
       className={`
@@ -50,7 +50,7 @@ export default function CurrencyCard({
                     alt={currency.code}
                     width={48}
                     height={48}
-                    className="object-cover"
+                    className="h-full object-cover"
                   />
                 )
               : (

@@ -60,6 +60,21 @@ export class NewsletterService {
     return await subscriberRepo.save(subscriber);
   }
 
+  async unsubscribeUser(id: string) {
+    const dataSource = await getDataSource();
+
+    const subscriberRepo = dataSource.getRepository('Subscriber');
+
+    const subscriber = await subscriberRepo.findOneBy({ id });
+
+    if (!subscriber) {
+      throw new Error('Subscriber not found');
+    }
+
+    subscriber.isSubscribed = false;
+    return await subscriberRepo.save(subscriber);
+  }
+
   async getSubscribers() {
     const subscriberRepo = await this.getSubscriberRepository();
     return await subscriberRepo.find({
