@@ -47,6 +47,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       message: 'Admin created successfully',
       username,
+      password,
     });
   } catch (error) {
     console.error('Error creating admin:', error);
