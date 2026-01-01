@@ -6,10 +6,15 @@ export async function POST(request: NextRequest) {
   const { username, password } = await request.json();
 
   try {
-    const { token } = await authentication({ username, password });
+    const { token, user } = await authentication({ username, password });
 
-    const response = NextResponse.redirect(
-      new URL('/admin/currencies', request.url),
+    const response = NextResponse.json(
+      {
+        success: true,
+        message: 'Login successful',
+        user,
+      },
+      { status: 200 },
     );
 
     response.cookies.set({
