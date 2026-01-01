@@ -29,6 +29,9 @@ export const LocaleSwitcher = ({ className }: { className?: string }) => {
         transition
         anchor="bottom end"
         className="flex w-52 origin-top-right flex-col gap-1 rounded-xl border border-white/5 bg-white/20 p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:--spacing(1)] focus:outline-none data-closed:scale-95 data-closed:opacity-0"
+        style={{
+          zIndex: 100,
+        }}
       >
         <MenuItem>
           <Button

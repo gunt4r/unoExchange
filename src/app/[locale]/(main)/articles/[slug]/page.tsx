@@ -1,19 +1,24 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 /* eslint-disable react-dom/no-dangerously-set-innerhtml */
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import MyLink from '@/components/common/Link';
 import ViewCounter from '@/components/pages/articles/viewCounter';
 import { getDataSource } from '@/libs/DB';
-import { Article } from '@/models/article';
 import { getBaseUrl } from '@/utils/Helpers';
+import { Article } from '../../../../../models/article';
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
 };
 
 export async function generateStaticParams() {
+  if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    return [];
+  }
   const dataSource = await getDataSource();
   const articleRepo = dataSource.getRepository(Article);
 
@@ -86,7 +91,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticlesPage({ params }: Props) {
   const { slug, locale } = await params;
-
+  const t = await getTranslations({
+    locale,
+    namespace: 'Articles',
+  });
+  const tCommon = await getTranslations({
+    locale,
+    namespace: 'Common',
+  });
+  const tNavigation = await getTranslations({
+    locale,
+    namespace: 'Header',
+  });
   const dataSource = await getDataSource();
   const articleRepo = dataSource.getRepository(Article);
   const article = await articleRepo.findOne({
@@ -134,19 +150,19 @@ export default async function ArticlesPage({ params }: Props) {
       />
 
       <article className="mx-auto max-w-4xl px-4 py-8">
-        <nav className="mb-4 text-sm text-gray-600" aria-label="Breadcrumb">
+        <nav className="mb-4 text-sm text-cyan-50" aria-label="Breadcrumb">
           <ol className="flex items-center gap-2">
-            <li><MyLink href="/" opacity>Home</MyLink></li>
+            <li><MyLink href="/" opacity>{tNavigation('home_link')}</MyLink></li>
             <li>/</li>
-            <li><MyLink href="/articles" opacity>Articles</MyLink></li>
+            <li><MyLink href="/articles" opacity>{tNavigation('articles_link')}</MyLink></li>
             <li>/</li>
-            <li className="text-gray-900" aria-current="page">{article.title}</li>
+            <li className="text-zinc-100" aria-current="page">{article.title}</li>
           </ol>
         </nav>
 
-        <h1 className="mb-4 text-4xl font-bold">{article.title}</h1>
+        <h1 className="mb-4 text-4xl font-bold text-cyan-50">{article.title}</h1>
 
-        <div className="mb-6 flex flex-wrap gap-4 text-sm text-gray-600">
+        <div className="mb-6 flex flex-wrap gap-4 text-sm text-cyan-50">
           {article.author && (
             <span className="flex items-center gap-1">
               <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
@@ -175,7 +191,7 @@ export default async function ArticlesPage({ params }: Props) {
               </svg>
               {article.viewCount}
               {' '}
-              views
+              {t('views')}
             </span>
           )}
         </div>
@@ -194,13 +210,16 @@ export default async function ArticlesPage({ params }: Props) {
         )}
 
         <div
-          className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-img:rounded-lg max-w-none"
+          className="prose prose-lg prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-img:rounded-lg max-w-none text-cyan-50"
           dangerouslySetInnerHTML={{ __html: article.sanitizedHtml || '' }}
         />
 
         {article.tags && article.tags.length > 0 && (
           <div className="mt-8 border-t pt-8">
-            <h3 className="mb-3 text-sm font-semibold text-gray-700">Tags:</h3>
+            <h3 className="mb-3 text-sm font-semibold text-gray-700">
+              {t('tags')}
+              :
+            </h3>
             <div className="flex flex-wrap gap-2">
               {article.tags.map(tag => (
                 <div
@@ -224,7 +243,7 @@ export default async function ArticlesPage({ params }: Props) {
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back
+            {tCommon('back')}
           </MyLink>
         </div>
       </article>

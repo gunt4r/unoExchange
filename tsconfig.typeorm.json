@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmit": false,
+    "outDir": "./dist"
+  },
+  "include": [
+    "typeorm.config.ts",
+    "src/models/**/*.ts",
+    "src/migrations/**/*.ts"
+  ],
+  "exclude": ["node_modules", ".next"]
+}

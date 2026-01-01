@@ -1,9 +1,9 @@
-import type { NextConfig } from 'next';
-import withBundleAnalyzer from '@next/bundle-analyzer';
+// next.config.mjs
 import createNextIntlPlugin from 'next-intl/plugin';
 
 // Define the base Next.js configuration
-const baseConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const baseConfig = {
   devIndicators: {
     position: 'bottom-right',
   },
@@ -28,7 +28,6 @@ const baseConfig: NextConfig = {
       },
     ],
   },
-
 };
 
 // Initialize the Next-Intl plugin
@@ -36,8 +35,14 @@ let configWithPlugins = createNextIntlPlugin('./src/libs/I18n.ts')(baseConfig);
 
 // Conditionally enable bundle analysis
 if (process.env.ANALYZE === 'true') {
-  configWithPlugins = withBundleAnalyzer()(configWithPlugins);
+  try {
+    const { default: withBundleAnalyzer } = await import('@next/bundle-analyzer');
+    configWithPlugins = withBundleAnalyzer({
+      enabled: true,
+    })(configWithPlugins);
+  } catch {
+    console.warn('Bundle analyzer not available, skipping...');
+  }
 }
 
-const nextConfig = configWithPlugins;
-export default nextConfig;
+export default configWithPlugins;

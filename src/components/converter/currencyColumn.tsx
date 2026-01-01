@@ -1,6 +1,7 @@
 'use client';
 
 import type { Currency } from '@/stores/useCurrencyStore';
+import { useTranslations } from 'next-intl';
 import { manrope } from '@/config/fonts';
 import CurrencyCard from './currencyCard';
 
@@ -19,6 +20,7 @@ export default function CurrencyColumn({
   disabledCurrencyCode,
   onSelectAction,
 }: CurrencyColumnProps) {
+  const t = useTranslations('Common');
   return (
     <div className="flex h-full flex-col">
       <h3 className={`mb-4 text-3xl font-bold text-cyan-50  uppercase text-shadow-gray-600 text-shadow-sm ${manrope.className}`}>{title}</h3>
@@ -27,7 +29,7 @@ export default function CurrencyColumn({
         {currencies && currencies.length === 0
           ? (
               <div className="py-8 text-center text-gray-400">
-                <p>No currencies found</p>
+                <p>{t('no_data')}</p>
               </div>
             )
           : (

@@ -1,11 +1,15 @@
 import type { MetadataRoute } from 'next';
+import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants';
 import { getDataSource } from '@/libs/DB';
-import { Article } from '@/models/article';
 import { getBaseUrl } from '@/utils/Helpers';
+import { Article } from '../models/article';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getBaseUrl();
 
+  if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    return [];
+  }
   const dataSource = await getDataSource();
   const articleRepo = dataSource.getRepository(Article);
 

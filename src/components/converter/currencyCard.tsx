@@ -2,6 +2,7 @@
 
 import type { Currency } from '@/stores/useCurrencyStore';
 import { Button } from '@headlessui/react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 type CurrencyCardProps = {
@@ -17,6 +18,7 @@ export default function CurrencyCard({
   isDisabled,
   onClickAction,
 }: CurrencyCardProps) {
+  const t = useTranslations('Converter');
   return (
     <Button
       onClick={() => !isDisabled && onClickAction(currency)}
@@ -69,14 +71,14 @@ export default function CurrencyCard({
 
             {currency.reserve !== null && (
               <div className="mt-1 text-xs text-gray-400">
-                Reserve:
+                {t('reserve')}
+                :
                 {' '}
                 {currency.reserve.toLocaleString()}
               </div>
             )}
           </div>
 
-          {/* Чекбокс / маркер */}
           <div
             className={`
               flex h-5 w-5 items-center justify-center rounded border-2

@@ -1,5 +1,10 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { NewsletterStatus } from '@/enums/newsletter.enum';
+
+export enum NewsletterStatus {
+  DRAFT = 'draft',
+  SENT = 'sent',
+  FAILED = 'FAILED',
+}
 
 @Entity('newsletters')
 export class Newsletter {

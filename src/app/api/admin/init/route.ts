@@ -1,6 +1,3 @@
-// src/app/api/admin/init/route.ts (для App Router)
-// или pages/api/admin/init.ts (для Pages Router)
-
 import type { NextRequest } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { NextResponse } from 'next/server';

@@ -5,7 +5,6 @@ import {
   FileText,
   LogOut,
   Mail,
-  Settings,
   X,
 } from 'lucide-react';
 import React from 'react';
@@ -32,7 +31,6 @@ export default function Sidebar({ isOpen, onCloseAction, currentPage }: SidebarP
     { name: 'Currencies', icon: <DollarSign className="h-5 w-5" />, href: '/admin/currencies' },
     { name: 'Articles', icon: <FileText className="h-5 w-5" />, href: '/admin/articles' },
     { name: 'Newsletter', icon: <Mail className="h-5 w-5" />, href: '/admin/newsletter' },
-    { name: 'Settings', icon: <Settings className="h-5 w-5" />, href: '/admin/settings' },
   ];
 
   function handleLogout() {

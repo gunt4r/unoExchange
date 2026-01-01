@@ -1,10 +1,9 @@
 import type { Repository } from 'typeorm';
 import crypto from 'node:crypto';
 import sanitize from 'sanitize-html';
-import { NewsletterStatus } from '@/enums/newsletter.enum';
 import { getDataSource } from '@/libs/DB';
 import { sanitizeOptions } from '@/libs/sanitizeOptions';
-import { Newsletter } from '@/models/newsletter';
+import { Newsletter, NewsletterStatus } from '@/models/newsletter';
 import { Subscriber } from '@/models/subscriber';
 import { EmailService } from './email';
 

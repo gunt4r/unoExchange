@@ -1,5 +1,8 @@
 /* eslint-disable no-restricted-globals */
+/* eslint-disable vars-on-top */
+/* eslint-disable no-console */
 import 'reflect-metadata';
+import { PHASE_PRODUCTION_BUILD } from 'next/dist/shared/lib/constants';
 import { DataSource } from 'typeorm';
 import { Admin } from '../models/admin';
 import { Article } from '../models/article';
@@ -8,7 +11,7 @@ import { Newsletter } from '../models/newsletter';
 import { Subscriber } from '../models/subscriber';
 
 declare global {
-  let __COURSE_FISHING_DS__: any;
+  var __UNOEXCHANGE_DS__: DataSource | undefined;
 }
 
 const PGUSER = process.env.DATABASE_USER || 'postgres';
@@ -16,6 +19,7 @@ const PGPASSWORD = process.env.DATABASE_PASSWORD || 'postgres';
 const PGHOST = process.env.DATABASE_HOST || 'localhost';
 const PGPORT = process.env.DATABASE_PORT ? Number.parseInt(process.env.DATABASE_PORT) : 5432;
 const PGDATABASE = process.env.DATABASE_NAME || 'unoexchange';
+
 function createDataSource() {
   const entities = [Currency, Subscriber, Newsletter, Article, Admin];
 
@@ -34,11 +38,11 @@ function createDataSource() {
 
   return new DataSource({
     type: 'postgres',
-    host: PGHOST || 'localhost',
-    port: Number(PGPORT || 5432),
-    username: PGUSER || 'postgres',
+    host: PGHOST,
+    port: PGPORT,
+    username: PGUSER,
     password: PGPASSWORD,
-    database: PGDATABASE || 'postgres',
+    database: PGDATABASE,
     entities,
     synchronize: process.env.NODE_ENV !== 'production',
     logging: process.env.NODE_ENV !== 'production',
@@ -46,37 +50,41 @@ function createDataSource() {
 }
 
 export async function getDataSource(): Promise<DataSource> {
-  if ((global as any).__COURSE_FISHING_DS__ && (global as any).__COURSE_FISHING_DS__.isInitialized) {
-    return (global as any).__COURSE_FISHING_DS__;
+  if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    throw new Error('❌ Database access during Next.js build phase');
   }
 
-  if (!(global as any).__COURSE_FISHING_DS__) {
-    (global as any).__COURSE_FISHING_DS__ = createDataSource();
+  if (global.__UNOEXCHANGE_DS__?.isInitialized) {
+    return global.__UNOEXCHANGE_DS__;
   }
 
-  const ds: DataSource = (global as any).__COURSE_FISHING_DS__;
+  if (!global.__UNOEXCHANGE_DS__) {
+    global.__UNOEXCHANGE_DS__ = createDataSource();
+  }
+
+  const ds = global.__UNOEXCHANGE_DS__;
+
   if (ds.isInitialized) {
     return ds;
   }
 
-  const maxAttempts = Number.parseInt(process.env.DB_MAX_ATTEMPTS || '0', 10);
+  const maxAttempts = Number(process.env.DB_MAX_ATTEMPTS || 5);
   let attempt = 0;
 
-  while (true) {
+  while (attempt < maxAttempts) {
     try {
       attempt++;
+      console.log(`🔄 DB connection attempt #${attempt}...`);
       await ds.initialize();
+      console.log('✅ Database connected successfully');
       return ds;
-    } catch (err) {
-      console.error(`DB init attempt #${attempt} failed:`, (err as Error).message || err);
-      // если maxAttempts > 0 и достигли лимита — пробрасываем ошибку (или можно process.exit)
-      if (maxAttempts > 0 && attempt >= maxAttempts) {
-        throw err;
+    } catch (error) {
+      console.error(`❌ DB init attempt #${attempt} failed:`, error);
+      if (attempt < maxAttempts) {
+        await new Promise(r => setTimeout(r, 1000 * attempt));
       }
-      // экспоненциальный бэкофф (до 30s)
-      const waitMs = Math.min(30000, 1000 * 2 ** Math.min(attempt, 6));
-      await new Promise(r => setTimeout(r, waitMs));
-      // и повторяем — не выходим из процесса
     }
   }
+
+  throw new Error('❌ DB connection failed after max attempts');
 }

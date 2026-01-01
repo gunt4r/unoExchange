@@ -2,6 +2,7 @@
 'use client';
 
 import { Button, Input } from '@headlessui/react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
@@ -10,6 +11,8 @@ import { usePostConvert } from '@/queries/useConvert';
 import { useCurrencyStore } from '@/stores/useCurrencyStore';
 
 export default function ConversionPanel() {
+  const t = useTranslations('Converter');
+  const commonTranslation = useTranslations('Common');
   const { mutateAsync: convert, isPending } = usePostConvert();
   const {
     fromCurrency,
@@ -73,7 +76,7 @@ export default function ConversionPanel() {
 
   return (
     <div className="flex h-full flex-col">
-      <h3 className={`mb-4 text-3xl font-bold  text-zinc-50 uppercase ${manrope.className}`}>Converter</h3>
+      <h3 className={`mb-4 text-3xl font-bold  text-zinc-50 uppercase ${manrope.className}`}>{t('title')}</h3>
       {!hasBothCurrencies
         ? (
             <div className="flex flex-1 items-center justify-center">
@@ -81,7 +84,7 @@ export default function ConversionPanel() {
                 <svg className="mx-auto mb-4 h-16 w-16 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                 </svg>
-                <p className="text-sm">Please select a currency to convert from and to</p>
+                <p className="text-sm">{t('select_currency')}</p>
               </div>
             </div>
           )
@@ -168,7 +171,7 @@ export default function ConversionPanel() {
                 <div className="text-2xl font-semibold text-zinc-200">
                   {isLoading
                     ? (
-                        <span className="text-zinc-500">Loading...</span>
+                        <span className="text-zinc-500">{commonTranslation('loading_now')}</span>
                       )
                     : toAmount
                       ? (
@@ -183,7 +186,7 @@ export default function ConversionPanel() {
               {conversionRate && (
                 <div className="animate-in fade-in rounded-lg border-2 border-gray-200 bg-white/10 p-4 backdrop-blur-md">
                   <div className="flex items-center justify-between text-gray-100">
-                    <span>Курс обмена:</span>
+                    <span>{t('conversion_rate')}</span>
                     <span className="font-semibold">
                       1
                       {' '}
@@ -198,7 +201,8 @@ export default function ConversionPanel() {
                   </div>
                   {lastUpdateTime && (
                     <div className="mt-1 text-xs text-zinc-400">
-                      Updated:
+                      {commonTranslation('updated')}
+                      :
                       {' '}
                       {lastUpdateTime}
                     </div>

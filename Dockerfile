@@ -1,53 +1,61 @@
-# 1. Берем Node
-FROM node:20-alpine
+# syntax=docker/dockerfile:1
 
-# 2. Рабочая папка внутри контейнера
+# 1. Build stage
+FROM node:22-alpine AS builder
+
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-RUN npm install -g pnpm
-
-# 3. Копируем package.json
+# Copy dependency files
 COPY package*.json ./
 
-# 4. Устанавливаем зависимости
-RUN npm install
+# Install all dependencies (including dev for build)
+RUN npm ci
 
-# 7. Открываем порт
+# Copy source code
+COPY . .
+
+# Build Next.js application
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN npm run build
+
+# 2. Production stage
+FROM node:22-alpine AS runner
+
+RUN apk add --no-cache openssl tzdata
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy package files
+COPY --from=builder /app/package*.json ./
+
+# Install ALL dependencies (required for TypeORM CLI with TS)
+# НЕ используйте --omit=dev, иначе сломаются миграции
+RUN npm ci && npm cache clean --force
+
+# Copy built Next.js application
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/next.config.mjs ./
+
+# Copy TypeORM config and migrations (ВАЖНО: копируем до смены пользователя)
+COPY --from=builder --chown=nextjs:nodejs /app/typeorm.config.ts ./
+COPY --from=builder --chown=nextjs:nodejs /app/src/migrations ./src/migrations
+COPY --from=builder --chown=nextjs:nodejs /app/src/models ./src/models
+COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.typeorm.json ./
+COPY --from=builder --chown=nextjs:nodejs /app/tsconfig.json ./
+
+
+# Switch to non-root user
+USER nextjs
+
 EXPOSE 3000
 
-# 8. Запуск приложения
-CMD ["npm", "run", "dev"]
-
-# 1. Сборочный этап
-# FROM node:22-alpine AS builder
-
-# RUN apk add --no-cache libc6-compat
-# WORKDIR /app
-# COPY package*.json ./
-# RUN npm ci
-# COPY . .
-# RUN npm run build
-
-# # 2. Production-этап
-# FROM node:22-alpine
-
-# RUN apk add --no-cache openssl tzdata
-# WORKDIR /app
-# COPY package*.json ./
-# RUN npm ci --omit=dev
-
-# COPY --from=builder /app/.next ./.next
-# COPY --from=builder /app/public ./public
-# COPY --from=builder /app/next.config.mjs ./
-# COPY --from=builder /app/next-i18next.config.js ./
-
-# # TypeORM
-# COPY --from=builder /app/src/models ./src/models
-# COPY --from=builder /app/src/libs/DB.ts ./src/libs/DB.ts
-
-# RUN chown -R node:node /app
-# USER node
-
-# EXPOSE 3000
-# ENV NODE_ENV=production
-# CMD ["npm", "run", "start"]
+# Run migrations first, then start the app
+CMD ["sh", "-c", "npm run migration:run && npm start"]

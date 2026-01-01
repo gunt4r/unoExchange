@@ -1,10 +1,13 @@
 'use client';
 import { Clock, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { usePostContact } from '@/queries/useContact';
 
 export function ClientContacts() {
+  const t = useTranslations('Contacts');
+  const tCommon = useTranslations('Common');
   const { mutate: postContact } = usePostContact();
   const [formData, setFormData] = useState({
     name: '',
@@ -20,11 +23,11 @@ export function ClientContacts() {
     setSubmitted(true);
     postContact(formData, {
       onSuccess: () => {
-        toast.success('Thanks for contacting us!');
+        toast.success(tCommon('thanks'));
         setSubmitted(false);
       },
       onError: () => {
-        toast.error('Something went wrong, please try again.');
+        toast.error(tCommon('something_went_wrong'));
       },
     });
     setFormData({
@@ -53,14 +56,14 @@ export function ClientContacts() {
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+1 (555) 123-4567', '+1 (555) 987-6543'],
-      link: 'tel:+15551234567',
+      details: ['+48 123 456 789', '+48 987 654 321'],
+      link: 'tel:+486c551234567',
     },
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['support@exchangepro.com', 'business@exchangepro.com'],
-      link: 'mailto:support@exchangepro.com',
+      details: ['zlotakantor@gmail.com'],
+      link: 'mailto:zlotakantor@gmail.com',
     },
     {
       icon: Clock,
@@ -72,7 +75,6 @@ export function ClientContacts() {
 
   return (
     <section id="contact" className="relative py-20">
-      {/* Background Elements */}
       <div className="absolute inset-0 ">
         <div className="absolute top-1/4 left-0 h-96 w-full rounded-full bg-green-500/10 blur-3xl"></div>
         <div className="absolute right-0 bottom-1/4 h-96 w-96 rounded-full bg-green-600/10 blur-3xl"></div>
@@ -81,11 +83,11 @@ export function ClientContacts() {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
           <div className="mb-4 inline-block rounded-full border border-green-500/20 bg-green-500/10 px-4 py-2">
-            <span className="text-sm text-green-400">Get In Touch</span>
+            <span className="text-sm text-green-400">{t('badge')}</span>
           </div>
-          <h2 className="mb-4 text-4xl text-white">Contact Us</h2>
+          <h2 className="mb-4 text-4xl text-white">{t('title')}</h2>
           <p className="mx-auto max-w-2xl text-gray-300">
-            Have questions? We're here to help. Reach out to us through any of the channels below.
+            {t('description')}
           </p>
         </div>
 
@@ -120,15 +122,13 @@ export function ClientContacts() {
           ))}
         </div>
 
-        {/* Main Content Grid */}
         <div className="grid gap-12 lg:grid-cols-2">
-          {/* Contact Form */}
           <div className="rounded-2xl border border-green-500/20 bg-linear-to-br from-gray-900 to-black p-8">
-            <h3 className="mb-6 text-2xl text-white">Send us a Message</h3>
+            <h3 className="mb-6 text-2xl text-white">{t('send_message')}</h3>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div>
-                  <p className="mb-2 block text-sm text-gray-400">Your Name</p>
+                  <p className="mb-2 block text-sm text-gray-400">{t('your_name')}</p>
                   <input
                     type="text"
                     name="name"
@@ -140,7 +140,7 @@ export function ClientContacts() {
                   />
                 </div>
                 <div>
-                  <p className="mb-2 block text-sm text-gray-400">Email Address</p>
+                  <p className="mb-2 block text-sm text-gray-400">{t('your_email')}</p>
                   <input
                     type="email"
                     name="email"
@@ -155,18 +155,18 @@ export function ClientContacts() {
 
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div>
-                  <p className="mb-2 block text-sm text-gray-400">Phone Number</p>
+                  <p className="mb-2 block text-sm text-gray-400">{t('your_phone')}</p>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full rounded-xl border border-green-500/20 bg-black/50 px-4 py-3 text-white placeholder-gray-500 transition-colors outline-none focus:border-green-500/40"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+48 (555) 000-000"
                   />
                 </div>
                 <div>
-                  <p className="mb-2 block text-sm text-gray-400">Subject</p>
+                  <p className="mb-2 block text-sm text-gray-400">{t('subject')}</p>
                   <select
                     name="subject"
                     value={formData.subject}
@@ -174,17 +174,17 @@ export function ClientContacts() {
                     required
                     className="w-full cursor-pointer rounded-xl border border-green-500/20 bg-black/50 px-4 py-3 text-white transition-colors outline-none focus:border-green-500/40"
                   >
-                    <option value="">Select a subject</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="support">Technical Support</option>
-                    <option value="business">Business Partnership</option>
-                    <option value="feedback">Feedback</option>
+                    <option value="">{t('select_subject')}</option>
+                    <option value="general">{t('general_inquiry')}</option>
+                    <option value="support">{t('technical_support')}</option>
+                    <option value="business">{t('business_enquiries')}</option>
+                    <option value="feedback">{t('feedback')}</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <p className="mb-2 block text-sm text-gray-400">Message</p>
+                <p className="mb-2 block text-sm text-gray-400">{t('your_message')}</p>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -192,7 +192,7 @@ export function ClientContacts() {
                   required
                   rows={6}
                   className="w-full resize-none rounded-xl border border-green-500/20 bg-black/50 px-4 py-3 text-white placeholder-gray-500 transition-colors outline-none focus:border-green-500/40"
-                  placeholder="Tell us how we can help you..."
+                  placeholder={t('tell_us_how_can_we_help')}
                 />
               </div>
 
@@ -208,13 +208,13 @@ export function ClientContacts() {
                 {submitted
                   ? (
                       <>
-                        <span>Message Sent!</span>
+                        <span>{t('message_sent')}</span>
                       </>
                     )
                   : (
                       <>
                         <Send className="h-5 w-5" />
-                        <span>Send Message</span>
+                        <span>{t('send_message_2')}</span>
                       </>
                     )}
               </button>
@@ -222,7 +222,6 @@ export function ClientContacts() {
           </div>
 
           <div className="space-y-6">
-            {/* Map */}
             <div className="h-full overflow-hidden rounded-2xl border border-green-500/20 bg-linear-to-br from-gray-900 to-black">
               <iframe
                 sandbox="allow-scripts"
