@@ -116,7 +116,7 @@ export default function Hero() {
                 >
                   <motion.h1
                     variants={itemVariants}
-                    className="text-[clamp(3.5rem,8vw,6rem)] font-semibold tracking-tight text-balance text-white uppercase sm:text-7xl"
+                    className="text-4xl font-semibold tracking-tight text-balance text-white uppercase sm:text-7xl"
                   >
                     {t('convert_money_with_ease')}
                   </motion.h1>
