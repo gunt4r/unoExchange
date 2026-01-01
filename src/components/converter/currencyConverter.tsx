@@ -113,7 +113,7 @@ export default function CurrencyConverterSection() {
               <h1 className="mb-20 text-center text-4xl font-bold uppercase">{t('title')}</h1>
             )}
 
-        <div className="mb-10 grid h-[700px] grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="mb-10 grid h-[900px] sm:h-[700px] grid-cols-1 gap-6 lg:grid-cols-3">
           {mounted
             ? (
                 <>
@@ -126,7 +126,7 @@ export default function CurrencyConverterSection() {
                     className="flex flex-col overflow-hidden rounded-2xl border border-green-500/20 bg-linear-to-br from-gray-900 to-black p-8 shadow-lg transition-all hover:border-green-500/40 hover:shadow-xl hover:shadow-green-500/10"
                   >
                     <CurrencyColumn
-                      title="From currency"
+                      title={t('from_currency')}
                       currencies={currencies}
                       selectedCurrency={fromCurrency}
                       disabledCurrencyCode={toCurrency?.code || null}
@@ -143,7 +143,7 @@ export default function CurrencyConverterSection() {
                     className="flex flex-col overflow-hidden rounded-2xl border border-green-500/20 bg-linear-to-br from-gray-900 to-black p-8 shadow-lg transition-all hover:border-green-500/40 hover:shadow-xl hover:shadow-green-500/10"
                   >
                     <CurrencyColumn
-                      title="To currency"
+                      title={t('to_currency')}
                       currencies={currencies}
                       selectedCurrency={toCurrency}
                       disabledCurrencyCode={fromCurrency?.code || null}
@@ -192,7 +192,6 @@ export default function CurrencyConverterSection() {
               )}
         </div>
 
-        {/* Анимированные фичи */}
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-3">
           {features.map((feature, i) => {
             const Icon = feature.icon;

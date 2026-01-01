@@ -122,7 +122,7 @@ export function Newsletter() {
                 repeat: Infinity,
                 ease: easeInOut,
               }}
-              className="absolute top-10 left-10 h-72 w-72 rounded-full bg-green-400/20 blur-3xl"
+              className="absolute top-10 left-10 h-72 w-14 rounded-full bg-green-400/20 blur-3xl sm:w-72"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -136,7 +136,7 @@ export function Newsletter() {
                 ease: easeInOut,
                 delay: 1,
               }}
-              className="absolute right-10 bottom-10 h-72 w-72 rounded-full bg-green-600/20 blur-3xl"
+              className="absolute right-10 bottom-10 h-72 w-14 rounded-full bg-green-600/20 blur-3xl sm:w-72"
             />
           </>
         )}
@@ -195,7 +195,7 @@ export function Newsletter() {
                       <Button
                         type="submit"
                         disabled={subscribed}
-                        className={`cursor-pointer rounded-xl px-8 py-4 shadow-lg transition-all ${
+                        className={`flex cursor-pointer justify-self-center rounded-xl px-8 py-4 shadow-lg transition-all ${
                           subscribed
                             ? 'bg-green-600 text-white'
                             : 'bg-linear-to-r from-green-600 to-green-500 text-white shadow-green-500/30 hover:opacity-70'
@@ -249,7 +249,7 @@ export function Newsletter() {
                     <Button
                       type="submit"
                       disabled={subscribed}
-                      className={`cursor-pointer rounded-xl px-8 py-4 shadow-lg transition-all ${
+                      className={`flex cursor-pointer justify-self-center rounded-xl px-8 py-4 shadow-lg transition-all ${
                         subscribed
                           ? 'bg-green-600 text-white'
                           : 'bg-linear-to-r from-green-600 to-green-500 text-white shadow-green-500/30 hover:opacity-70'

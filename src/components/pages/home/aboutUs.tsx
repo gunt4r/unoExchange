@@ -1,6 +1,6 @@
 'use client';
 
-import { easeOut, motion, useInView, useMotionValue, useSpring } from 'framer-motion';
+import { easeOut, easeInOut, motion, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
@@ -107,7 +107,7 @@ export function About() {
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: easeInOut,
           }}
           className="absolute top-1/2 left-0 h-96 w-96 max-w-full rounded-full bg-green-500/10 blur-3xl"
         />
@@ -120,10 +120,10 @@ export function About() {
           transition={{
             duration: 12,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: easeInOut,
             delay: 1,
           }}
-          className="absolute right-0 bottom-0 h-96 w-96 max-w-full rounded-full bg-green-600/10 blur-3xl"
+          className="absolute right-0 bottom-0 h-96 w-26 sm:w-96 max-w-full rounded-full bg-green-600/10 blur-3xl"
         />
       </div>
 

@@ -16,33 +16,33 @@ export function Features() {
   const features = [
     {
       icon: Globe,
-      title: 'Global Coverage',
-      description: 'Support for 150+ currencies and 200+ countries worldwide',
+      title: t('global_coverage'),
+      description: t('global_coverage_description'),
     },
     {
       icon: Lock,
-      title: 'Secure & Safe',
-      description: 'Military-grade encryption and compliance with international standards',
+      title: t('secure_safe'),
+      description: t('secure_safe_description'),
     },
     {
       icon: CreditCard,
-      title: 'Multiple Payment Methods',
-      description: 'Bank transfer, credit card, debit card, and digital wallets',
+      title: t('multiple_payment_methods'),
+      description: t('multiple_payment_methods_description'),
     },
     {
       icon: BarChart3,
-      title: 'Real-Time Rates',
-      description: 'Access live exchange rates updated every second',
+      title: t('real_time_rates'),
+      description: t('real_time_rates_description'),
     },
     {
       icon: Clock,
-      title: '24/7 Support',
-      description: 'Round-the-clock customer service in multiple languages',
+      title: t('24_support'),
+      description: t('24_support_description'),
     },
     {
       icon: Users,
-      title: 'Business Solutions',
-      description: 'Dedicated tools for businesses and high-volume traders',
+      title: t('business_solutions'),
+      description: t('business_solutions_description'),
     },
   ];
 
@@ -147,7 +147,6 @@ export function Features() {
               )}
         </div>
 
-        {/* Анимированные карточки */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
             const Icon = feature.icon;

@@ -30,7 +30,7 @@ export default function ClientNewsPage() {
       {articles.length === 0
         ? (
             <div className="py-20 text-center">
-              <p className="text-gray-600">{commonTranslation('no_data')}</p>
+              <p className="text-cyan-50">{commonTranslation('no_data')}</p>
             </div>
           )
         : (

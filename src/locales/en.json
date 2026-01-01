@@ -61,12 +61,26 @@
     "bank_security": "Bank-grade security",
     "bank_description": "Industry-standard encryption and compliance with global financial regulations.",
     "rates_title": "Best Rates",
-    "rates_description": "Real-time updates"
+    "rates_description": "Real-time updates",
+    "to_currency": "To currency",
+    "from_currency": "From currency"
   },
   "Features": {
     "badge": "Why Choose Us",
     "title": "Everything You Need",
-    "description": "Powerful features designed to make currency conversion simple, fast, and secure"
+    "description": "Powerful features designed to make currency conversion simple, fast, and secure",
+    "global_coverage": "Global Coverage",
+    "global_coverage_description": "Support for 150+ currencies and 200+ countries worldwide.",
+    "secure_safe": "Secure & Safe",
+    "secure_safe_description": "Military-grade encryption and compliance with international standards",
+    "multiple_payment_methods": "Multiple Payment Methods",
+    "multiple_payment_methods_description": "Bank transfer, credit card, debit card, and digital wallets",
+    "real_time_rates": "Real-Time Rates",
+    "real_time_rates_description": "Instant updates on exchange rates, ensuring you always have the most accurate information.",
+    "24_support": "24/7 Support",
+    "24_support_description": "Round-the-clock customer service in multiple languages",
+    "business_solutions": "Business Solutions",
+    "business_solutions_description": "Dedicated tools for businesses and high-volume traders"
   },
   "AboutUs": {
     "badge": "About Us",
