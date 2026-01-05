@@ -16,8 +16,7 @@ export const getBaseUrl = () => {
     return `https://${process.env.VERCEL_URL}`;
   }
 
-  return 'http://localhost:3000';
-  // return 'https://www.unoexchange.net/';
+  return 'https://www.unoexchange.net/';
 };
 
 export const getI18nPath = (url: string, locale: string) => {
