@@ -1,7 +1,7 @@
 'use client';
 
 import { easeOut, motion } from 'framer-motion';
-import { BarChart3, Clock, CreditCard, Globe, Lock, Users } from 'lucide-react';
+import { BarChart3, Clock, Globe, Lock, Users, Trophy } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
@@ -25,7 +25,7 @@ export function Features() {
       description: t('secure_safe_description'),
     },
     {
-      icon: CreditCard,
+      icon: Trophy,
       title: t('multiple_payment_methods'),
       description: t('multiple_payment_methods_description'),
     },

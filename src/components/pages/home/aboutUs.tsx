@@ -10,10 +10,10 @@ export function About() {
   const t = useTranslations('AboutUs');
 
   const stats = [
-    { value: 50, suffix: 'B+', prefix: '$', label: t('processed_annually') },
+    { value: 5, suffix: 'M+', prefix: '$', label: t('processed_annually') },
     { value: 500, suffix: 'K+', prefix: '', label: t('active_users') },
-    { value: 4, suffix: '+', prefix: '', label: t('countries') },
-    { value: 200, suffix: '+', prefix: '', label: t('countries') },
+    { value: 4, suffix: '+', prefix: '', label: t('currencies') },
+    { value: 200, suffix: 'K+', prefix: '', label: t('reserve') },
   ];
 
   const benefits = [

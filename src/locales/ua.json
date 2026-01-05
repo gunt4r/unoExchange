@@ -44,7 +44,7 @@
     "button": "Почати конвертацію",
     "try": "Спробувати зараз",
     "trusted_by_customers": "Нам довіряють клієнти",
-    "convert_money_with_ease": "Обмінюйте валюту легко",
+    "convert_money_with_ease": "Легкий обмін валют",
     "hero_description": "Низькі комісії, актуальні курси в реальному часі та банківський рівень безпеки."
   },
   "Converter": {
@@ -53,11 +53,11 @@
     "amount": "Сума",
     "convert": "Конвертувати",
     "select_currency": "Будь ласка, оберіть валюти для конвертації",
-    "currency_rate": "Курс валюти",
+    "currency_rate": "Курс валют",
     "conversion_rate": "Коефіцієнт конвертації",
     "reserve": "Резерв",
-    "fast_settlements": "Швидкі розрахунки",
-    "fast_conversions": "Більшість операцій виконується протягом кількох хвилин.",
+    "fast_settlements": "Швидка робота",
+    "fast_conversions": "Від заявки до результату — процеси оптимізовані для економії вашого часу.",
     "bank_security": "Банківська безпека",
     "bank_description": "Сучасне шифрування та відповідність міжнародним фінансовим стандартам.",
     "rates_title": "Найкращі курси",
@@ -67,37 +67,37 @@
   },
   "Features": {
     "badge": "Чому обирають нас",
-    "title": "Все, що вам потрібно",
+    "title": "Усе, що вам потрібно",
     "description": "Потужні інструменти для швидкої, простої та безпечної конвертації валют",
-    "global_coverage": "Глобальне покриття",
-    "global_coverage_description": "Підтримка понад 150 валют та 200 країн світу.",
+    "global_coverage": "Глобальна присутність",
+    "global_coverage_description": "Наша платформа працює по всьому світу.",
     "secure_safe": "Безпечно та надійно",
     "secure_safe_description": "Шифрування військового рівня та відповідність міжнародним стандартам",
-    "multiple_payment_methods": "Різні способи оплати",
-    "multiple_payment_methods_description": "Банківські перекази, картки та цифрові гаманці",
+    "multiple_payment_methods": "Лідери ринку",
+    "multiple_payment_methods_description": "Роки досвіду, перевірені процеси та довіра клієнтів роблять нас орієнтиром у сфері фіатних операцій.",
     "real_time_rates": "Курси в реальному часі",
-    "real_time_rates_description": "Миттєві оновлення валютних курсів.",
+    "real_time_rates_description": "Миттєві оновлення курсів валют.",
     "24_support": "Підтримка 24/7",
     "24_support_description": "Цілодобова підтримка клієнтів різними мовами",
     "business_solutions": "Рішення для бізнесу",
-    "business_solutions_description": "Інструменти для компаній та великих обсягів операцій"
+    "business_solutions_description": "Інструменти для компаній та великих операцій"
   },
   "AboutUs": {
     "badge": "Про нас",
     "title": "Надійність та безпека",
-    "description": "Ми ставимо безпеку та захист фінансових операцій на перше місце.",
-    "why_different": "Чим ми відрізняємося",
+    "description": "Ми приділяємо першочергову увагу безпеці фінансових операцій.",
+    "why_different": "Чому ми кращі",
     "why_different_description": "Сучасні технології, прозорість та орієнтація на клієнта.",
     "processed_annually": "Обробляється щорічно",
     "active_users": "Активних користувачів",
     "currencies": "Валют",
-    "countries": "Країн",
+    "reserve": "Резерв",
     "no_hidden_fees": "Без прихованих комісій",
-    "transparent_pricing": "Прозора цінова політика",
-    "instant_transfer_notifications": "Миттєві сповіщення",
-    "multi_currency": "Мультивалютні рахунки",
-    "api_access": "API для розробників",
-    "mobile_app": "Мобільний застосунок"
+    "transparent_pricing": "Прозоре ціноутворення",
+    "instant_transfer_notifications": "Досвідчена команда з багаторічною практикою",
+    "multi_currency": "Довіра клієнтів та стабільна репутація",
+    "api_access": "Відповідність вимогам KYC/AML",
+    "mobile_app": "Швидка обробка фіатних операцій"
   },
   "Newsletter": {
     "badge": "Будьте в курсі",
@@ -107,22 +107,22 @@
     "thanks": "Дякуємо за підписку!"
   },
   "Email": {
-    "enter": "Введіть вашу електронну пошту",
+    "enter": "Введіть ваш email",
     "send": "Надіслати",
     "subscribed": "Підписку оформлено",
     "already_subscribed": "Ви вже підписані",
     "subscribe": "Підписатися"
   },
   "Footer": {
-    "description": "Надійна платформа для обміну валют та міжнародних переказів.",
+    "description": "Надійна платформа для обміну валют.",
     "navigation": "Навігація",
     "contacts": "Контакти",
-    "all_rights_reserved": "Всі права захищені."
+    "all_rights_reserved": "Усі права захищені."
   },
   "Contacts": {
     "badge": "Зв’яжіться з нами",
     "title": "Контакти",
-    "description": "Маєте запитання? Ми завжди готові допомогти.",
+    "description": "Є питання? Зв’яжіться з нами зручним способом.",
     "send_message": "Надіслати повідомлення",
     "your_name": "Ваше ім’я",
     "your_email": "Ваш email",
@@ -138,6 +138,6 @@
     "business_enquiries": "Співпраця",
     "feedback": "Зворотний зв’язок",
     "other": "Інше",
-    "tell_us_how_can_we_help": "Розкажіть, як ми можемо допомогти"
+    "tell_us_how_can_we_help": "Розкажіть, чим ми можемо допомогти"
   }
 }
