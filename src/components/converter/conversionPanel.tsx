@@ -89,7 +89,7 @@ export default function ConversionPanel() {
             </div>
           )
         : (
-            <div className="animate-in fade-in flex-1 space-y-4 duration-300">
+            <div className="animate-in fade-in flex-1 overflow-y-auto space-y-4 duration-300">
               <div className="rounded-lg border-2 border-gray-200 bg-white/10 p-4 backdrop-blur-md">
                 <div className="mb-3 flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-100">

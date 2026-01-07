@@ -15,7 +15,7 @@ export function Footer() {
     ],
     contact: [
       { name: 'zlotakantor@gmail.com', href: 'mailto:zlotakantor@gmail.com' },
-      { name: '000-000-000', href: 'tel:000-000-000' },
+      { name: '+48 692 080 561', href: 'tel:+48692080561' },
     ],
   };
 

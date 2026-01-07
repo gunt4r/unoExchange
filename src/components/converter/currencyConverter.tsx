@@ -113,7 +113,7 @@ export default function CurrencyConverterSection() {
               <h1 className="mb-20 text-center text-4xl font-bold uppercase">{t('title')}</h1>
             )}
 
-        <div className="mb-10 grid h-[900px] sm:h-[700px] grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="mb-10 grid h-[1100px] sm:h-[700px] grid-cols-1 gap-6 lg:grid-cols-3">
           {mounted
             ? (
                 <>

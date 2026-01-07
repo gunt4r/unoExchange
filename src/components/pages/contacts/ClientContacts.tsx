@@ -56,8 +56,8 @@ export function ClientContacts() {
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+48 123 456 789', '+48 987 654 321'],
-      link: 'tel:+486c551234567',
+      details: ['+48 692 080 561'],
+      link: 'tel:+48692080561',
     },
     {
       icon: Mail,
