@@ -204,7 +204,7 @@ export function About() {
           >
             <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-green-400 to-green-600 opacity-20 blur-2xl" />
             <Image
-              src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxidXNpbmVzcyUyMHRlYW18ZW58MXx8fHwxNzY2MzEwNjE4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+              src="/assets/images/office-image.jpg"
               alt="Team"
               className="relative h-auto w-full rounded-2xl border border-green-500/20 object-cover"
               width={1080}

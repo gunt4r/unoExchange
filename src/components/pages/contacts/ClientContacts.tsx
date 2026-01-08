@@ -50,7 +50,7 @@ export function ClientContacts() {
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: ['123 Exchange Street', 'Financial District', 'New York, NY 10004', 'United States'],
+      details: ['Złota 71', '00-819', 'Warszawa, Poland'],
       link: 'https://maps.google.com',
     },
     {
@@ -225,7 +225,7 @@ export function ClientContacts() {
             <div className="h-full overflow-hidden rounded-2xl border border-green-500/20 bg-linear-to-br from-gray-900 to-black">
               <iframe
                 sandbox="allow-scripts"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.7609255595335!2d20.997088700000003!3d52.2295612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc8e195407b9%3A0xeab277fc5e54914d!2zWsWCb3RhIDcxLCAwMC04MTkgV2Fyc3phd2EsINCf0L7Qu9GM0YjQsA!5e0!3m2!1sru!2s!4v1766524682988!5m2!1sru!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2443.7609255595335!2d20.997088700000003!3d52.2295612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecc8e195407b9%3A0xeab277fc5e54914d!2zWsWCb3RhIDcxLCAwMC04MTkgV2Fyc3phd2EsINCf0L7Qu9GM0YjQsA!5e0!3m2!1sru!2s!4v1767897955167!5m2!1sru!2s"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
