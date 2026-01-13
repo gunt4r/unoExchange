@@ -25,7 +25,7 @@ FROM node:22-alpine AS runner
 RUN apk add --no-cache openssl tzdata
 WORKDIR /app
 
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 ENV NEXT_TELEMETRY_DISABLED=1
 
 # Create non-root user

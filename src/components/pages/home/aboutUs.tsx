@@ -174,6 +174,7 @@ export function About() {
             viewport={{ once: true, amount: 0.3 }}
             variants={contentVariants}
           >
+            <Image className="relative max-w-3/5 justify-self-center w-full mb-16 rounded-2xl border border-green-500/20"  src="/assets/images/unoexchange.svg" alt="logo" width={100} height={100} />
             <h3 className="mb-6 text-3xl text-white">{t('why_different')}</h3>
             <p className="mb-8 text-gray-300">{t('why_different_description')}</p>
 
